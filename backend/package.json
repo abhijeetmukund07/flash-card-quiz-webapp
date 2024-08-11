@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.11.0"
+  },
+  "name": "flash-card-backend",
+  "version": "1.0.0",
+  "description": "This is the backend for flashcard app. Developed by N V Abhijeet Mukund",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "N V Abhijeet Mukund",
+  "license": "ISC"
+}
