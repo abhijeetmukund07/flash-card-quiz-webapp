@@ -7,6 +7,7 @@ import QuizPage from "./pages/home page/QuizPage/QuizPage";
 import AdminLoginForm from "./pages/admin login page/AdminLoginForm";
 import AdminPage from "./pages/admin page/AdminPage";
 import AddCard from "./pages/add cards/AddCard";
+import AdminEditOrDeleteCards from "./pages/admin edit or delete cards/AdminEditOrDeleteCards";
 
 function App() {
   const browserRouter = createBrowserRouter([
@@ -33,6 +34,10 @@ function App() {
             {
               path:'add',
               element:<AddCard/>
+            },
+            {
+              path: 'manage-cards',
+              element: <AdminEditOrDeleteCards/>
             }
           ]
         },

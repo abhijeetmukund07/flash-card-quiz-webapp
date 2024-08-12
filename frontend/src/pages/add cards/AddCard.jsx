@@ -15,7 +15,12 @@ function AddCard() {
 
   const selectedCategory = watch("category");
 
-  let categories = [{id:1, name:"DSA"},{id:2,name:"Web Dev"},{id:3,name:"App Dev"},{id:4,name:"DBMS"}]
+  let categories = [
+    { id: 1, name: "DSA" },
+    { id: 2, name: "Web Dev" },
+    { id: 3, name: "App Dev" },
+    { id: 4, name: "DBMS" },
+  ];
 
   useEffect(() => {
     if (selectedCategory === "other") {
@@ -25,8 +30,10 @@ function AddCard() {
     }
   }, [selectedCategory]);
 
+  //fill it
   function onCreateCategory() {}
 
+  //fill it
   function onSubmit() {}
 
   const handleFormSubmit = (data) => {
@@ -39,7 +46,7 @@ function AddCard() {
 
   return (
     <div className="addcard-form-container">
-      <h2>Add New Flashcard</h2>
+      <h2 className="fs-1">Add New Flashcard</h2>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         {/* Question Input */}
         <div className="addcard-form-group">

@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-light bg-light navbar-expanded-sm">
       <div className="branding mx-3">
-        <NavLink to={"/"}>
+        <NavLink to={"/"} style={{color:"black"}}>
           <h1>Flash Study</h1>
         </NavLink>
       </div>

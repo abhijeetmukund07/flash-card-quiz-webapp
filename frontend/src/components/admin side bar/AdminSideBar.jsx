@@ -11,19 +11,22 @@ function ClientSidebar() {
     <div className="client-sidebar">
       <div>
         <div className="client-sidebar-options">
-          <NavLink to="add" className="client-sidebar-option">
+          <NavLink
+            to="add"
+            className="client-sidebar-option"
+            style={{ color: "black", textDecoration: "none" }}
+          >
             <MdAddCircleOutline fontSize={30} />
             <p className="lead">Add Card</p>
           </NavLink>
 
-          <NavLink to={`/admin`} className="client-sidebar-option">
+          <NavLink
+            to="manage-cards"
+            className="client-sidebar-option"
+            style={{ color: "black", textDecoration: "none" }}
+          >
             <FiEdit fontSize={30} />
-            <p className="lead">Edit Cards</p>
-          </NavLink>
-
-          <NavLink to={`/admin`} className="client-sidebar-option">
-            <MdDeleteOutline fontSize={30} />
-            <p className="lead">Delete Cards</p>
+            <p className="lead">Manage Cards</p>
           </NavLink>
         </div>
       </div>
