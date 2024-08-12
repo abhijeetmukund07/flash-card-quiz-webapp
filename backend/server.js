@@ -12,8 +12,7 @@ app.use(cors())
 
 
 // Static files (if you need to serve any)
-app.use('/static', express.static(path.join(__dirname, 'public')));
-
+app.use(express.static(path.join(__dirname,'../frontend/build')))
 // Routing to user APIs
 app.use('/', userApp);
 
