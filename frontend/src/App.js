@@ -4,6 +4,10 @@ import RootLayout from "./RootLayout";
 import CardCarousel from "./components/card carousel/CardCarousel";
 import HomePage from "./pages/home page/HomePage";
 import QuizPage from "./pages/home page/QuizPage/QuizPage";
+import AdminLoginForm from "./pages/admin login page/AdminLoginForm";
+import AdminPage from "./pages/admin page/AdminPage";
+import AddCard from "./pages/add cards/AddCard";
+
 function App() {
   const browserRouter = createBrowserRouter([
     {
@@ -17,6 +21,20 @@ function App() {
         {
           path: "/:category",
           element: <QuizPage />,
+        },
+        {
+          path: "admin-login",
+          element: <AdminLoginForm />,
+        },
+        {
+          path: "admin",
+          element: <AdminPage />,
+          children:[
+            {
+              path:'add',
+              element:<AddCard/>
+            }
+          ]
         },
       ],
     },
