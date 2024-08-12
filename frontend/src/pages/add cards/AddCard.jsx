@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "./AddCard.css"; // Import the custom CSS for styling
+import axios from "axios";
 
 function AddCard() {
+  let token = sessionStorage.getItem("token");
+  const axiosWithToken = axios.create({
+    headers: { authorization: `Bearer ${token}` },
+  });
   const {
     register,
     handleSubmit,
@@ -10,17 +15,28 @@ function AddCard() {
     reset,
     setValue,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      category: "", // Set default value to an empty string
+    },
+  });
   const [isOtherCategory, setIsOtherCategory] = useState(false);
-
+  const [categories, setCategories] = useState([]); // Initialize as an empty array
   const selectedCategory = watch("category");
 
-  let categories = [
-    { id: 1, name: "DSA" },
-    { id: 2, name: "Web Dev" },
-    { id: 3, name: "App Dev" },
-    { id: 4, name: "DBMS" },
-  ];
+  async function getCategories() {
+    try {
+      const response = await axiosWithToken.get("http://localhost:5000/admin/categories");
+      setCategories(response.data); // Set categories data
+      console.log(categories);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  }
+
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   useEffect(() => {
     if (selectedCategory === "other") {
@@ -30,16 +46,23 @@ function AddCard() {
     }
   }, [selectedCategory]);
 
-  //fill it
-  function onCreateCategory() {}
-
-  //fill it
-  function onSubmit() {}
+  async function onSubmit(cardData) {
+    try {
+      console.log("in addCard.jsx", cardData);
+      const res = await axiosWithToken.post("http://localhost:5000/admin/add-flashcard", cardData);
+      console.log(res.data);
+      if (res.data.status === "success") {
+        alert("Card Inserted Successfully");
+      }
+    } catch (error) {
+      console.error("Error submitting flashcard:", error);
+    }
+  }
 
   const handleFormSubmit = (data) => {
-    if (isOtherCategory) {
-      onCreateCategory(data.newCategory); // Create new category
-    }
+    // if (isOtherCategory) {
+    //   onCreateCategory(data.newCategory); // Create new category
+    // }
     onSubmit(data); // Submit the flashcard data
     reset(); // Reset the form
   };
@@ -70,11 +93,19 @@ function AddCard() {
         <div className="addcard-form-group">
           <label htmlFor="category">Category</label>
           <select id="category" {...register("category", { required: "Category is required" })}>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
+            <option value="" disabled>
+              Select a category
+            </option>{" "}
+            {/* Non-selectable placeholder */}
+            {categories.length > 0 ? (
+              categories.map((category) => (
+                <option key={category.id} value={category.name}>
+                  {category.name}
+                </option>
+              ))
+            ) : (
+              <option value="">Loading categories...</option>
+            )}
             <option value="other">Other</option>
           </select>
           {errors.category && <p className="error-message">{errors.category.message}</p>}
@@ -82,12 +113,20 @@ function AddCard() {
 
         {/* New Category Input */}
         {isOtherCategory && (
-          <div className="form-group">
-            <label htmlFor="newCategory">New Category</label>
+          <div className="addcard-form-group">
+            <label
+              htmlFor="newCategory"
+              className="form-label"
+              style={{ color: "#d2691e", fontWeight: "bold" }}
+            >
+              New Category
+            </label>
             <input
               id="newCategory"
               type="text"
-              {...register("newCategory", { required: "New Category is required" })}
+              {...register("newCategory", {
+                required: isOtherCategory ? "New Category is required" : false,
+              })}
             />
             {errors.newCategory && <p className="error-message">{errors.newCategory.message}</p>}
           </div>

@@ -1,36 +1,37 @@
-// import React from "react";
-// import './AdminLoginForm.css'
-// function AdminLoginForm() {
-//   return (
-//     <div>
-//       <form className="form w-25 mx-auto mt-5">
-//         <span className="heading">Admin Sign In</span>
-
-//         <span className="Mail">E-Mail</span>
-//         <input placeholder="Enter E-Mail" type="text" className="input" />
-//         <span className="Password">Password</span>
-//         <input placeholder="Enter Password" type="text" className="input" />
-//         <button>Submit</button>
-//       </form>
-//     </div>
-//   );
-// }
-
-// export default AdminLoginForm;
-
 import React from "react";
 import { useForm } from "react-hook-form";
 import "./AdminLoginForm.css";
+import axios from 'axios'
+import { useNavigate, Link } from "react-router-dom";
 
 function AdminLoginForm() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (adminCred) => {
+    try {
+      const response = await axios.post('http://localhost:5000/admin/login', {
+        username: adminCred.username,  // Assuming the API expects 'username' field instead of 'email'
+        password: adminCred.password
+      });
+
+      // Check if the response is successful and a token is returned
+      if (response.data.statusCode === 200 && response.data.token) {
+        // Store the token in session storage
+        sessionStorage.setItem('token', response.data.token);
+        // Navigate to the admin dashboard or home page
+        navigate('/admin');
+      } else {
+        alert("Login failed. Please check your credentials.");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      alert("An error occurred during login. Please try again.");
+    }
   };
 
   return (
@@ -38,14 +39,14 @@ function AdminLoginForm() {
       <form className="form w-25 mx-auto mt-5" onSubmit={handleSubmit(onSubmit)}>
         <span className="heading">Admin Sign In</span>
 
-        <span className="Mail">E-Mail</span>
+        <span className="Mail">Username</span>
         <input
-          placeholder="Enter E-Mail"
+          placeholder="Enter Username"
           type="text"
           className="input"
-          {...register("email", { required: "E-Mail is required" })}
+          {...register("username", { required: "Username is required" })}
         />
-        {errors.email && <p>{errors.email.message}</p>}
+        {errors.username && <p>{errors.username.message}</p>}
 
         <span className="Password">Password</span>
         <input

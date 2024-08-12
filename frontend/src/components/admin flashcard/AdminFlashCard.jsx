@@ -7,7 +7,7 @@ function AdminFlashCard({ category, question, answer, onEdit, onDelete }) {
     <div className="admin-flashcard">
       <div className="admin-flashcard-content">
         <h4 className="admin-flashcard-category">{category}</h4>
-        <h3 className="admin-flashcard-question">{question}</h3>
+        <h5 className="admin-flashcard-question">{question}</h5>
         <p className="admin-flashcard-answer">{answer}</p>
       </div>
       <div className="admin-flashcard-overlay">

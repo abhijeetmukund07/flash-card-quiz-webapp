@@ -8,7 +8,7 @@ import AdminLoginForm from "./pages/admin login page/AdminLoginForm";
 import AdminPage from "./pages/admin page/AdminPage";
 import AddCard from "./pages/add cards/AddCard";
 import AdminEditOrDeleteCards from "./pages/admin edit or delete cards/AdminEditOrDeleteCards";
-
+import PrivateRoute from "./components/private route/PrivateRoute";
 function App() {
   const browserRouter = createBrowserRouter([
     {
@@ -29,15 +29,15 @@ function App() {
         },
         {
           path: "admin",
-          element: <AdminPage />,
+          element: <PrivateRoute element={<AdminPage />} />, // Protect this route
           children:[
             {
-              path:'add',
-              element:<AddCard/>
+              path: "add",
+              element: <PrivateRoute element={<AddCard />} />, // Protect this route
             },
             {
-              path: 'manage-cards',
-              element: <AdminEditOrDeleteCards/>
+              path: "manage-cards",
+              element: <PrivateRoute element={<AdminEditOrDeleteCards />} />, // Protect this route
             }
           ]
         },

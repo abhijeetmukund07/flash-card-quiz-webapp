@@ -12,8 +12,8 @@
   border-radius: 1rem;
   padding: 20px;
   box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
-  width: 300px;
-  height: 200px;
+  width: 330px;
+  height: 250px;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -34,13 +34,13 @@
 }
 
 .admin-flashcard-question {
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-weight: bold;
   margin: 10px 0 0;
 }
 
 .admin-flashcard-answer {
-  font-size: 1.2em;
+  font-size: 1.0em;
   color: tomato;
   margin: 20px 0 0;
 }
