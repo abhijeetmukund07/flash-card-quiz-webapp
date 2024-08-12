@@ -1,8 +1,17 @@
 import React from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import "./AdminFlashCard.css";
+import { useNavigate } from "react-router-dom";  // Import useNavigate
 
-function AdminFlashCard({ category, question, answer, onEdit, onDelete }) {
+function AdminFlashCard({ id, category, question, answer, onDelete }) {
+  const navigate = useNavigate();
+  const handleEdit = () => {
+    console.log('AdminFlashCard props:', { id, category, question, answer });
+    navigate("/admin/edit-cards", {
+      state: { id, category, question, answer } // Pass the card data as state
+    });
+  };
+
   return (
     <div className="admin-flashcard">
       <div className="admin-flashcard-content">
@@ -11,7 +20,7 @@ function AdminFlashCard({ category, question, answer, onEdit, onDelete }) {
         <p className="admin-flashcard-answer">{answer}</p>
       </div>
       <div className="admin-flashcard-overlay">
-        <FaEdit className="icon edit-icon" onClick={onEdit} />
+        <FaEdit className="icon edit-icon" onClick={handleEdit} />
         <FaTrashAlt className="icon delete-icon" onClick={onDelete} />
       </div>
     </div>
@@ -19,3 +28,4 @@ function AdminFlashCard({ category, question, answer, onEdit, onDelete }) {
 }
 
 export default AdminFlashCard;
+

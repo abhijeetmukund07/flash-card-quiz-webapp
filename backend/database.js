@@ -84,6 +84,7 @@ async function addFlashcard(question, answer, categoryName) {
 //   return result.affectedRows;
 // }
 async function editFlashcard(id, question, answer, categoryName) {
+  console.log('In Edit flashCards:',id)
   let categoryId;
   let categoryPath;
 
@@ -108,6 +109,7 @@ async function editFlashcard(id, question, answer, categoryName) {
 
   const query = "UPDATE flashcards SET question = ?, answer = ?, category_id = ? WHERE id = ?";
   const [result] = await pool.query(query, [question, answer, categoryId, id]);
+  console.log(result.affectedRows)
   return result.affectedRows;
 }
 

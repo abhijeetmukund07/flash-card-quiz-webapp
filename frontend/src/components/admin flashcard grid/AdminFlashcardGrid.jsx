@@ -33,6 +33,7 @@ function AdminFlashcardGrid({ flashcards, onEdit, onDelete }) {
         {flashcards.map((card) => (
           <div key={card.id} className="col mb-3">
             <AdminFlashcard
+              id={card.id}
               category={card.category}
               question={card.question}
               answer={card.answer}

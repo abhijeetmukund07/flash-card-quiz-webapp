@@ -9,6 +9,7 @@ import AdminPage from "./pages/admin page/AdminPage";
 import AddCard from "./pages/add cards/AddCard";
 import AdminEditOrDeleteCards from "./pages/admin edit or delete cards/AdminEditOrDeleteCards";
 import PrivateRoute from "./components/private route/PrivateRoute";
+import EditCard from "./pages/edit cards/EditCards";
 function App() {
   const browserRouter = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ function App() {
             {
               path: "manage-cards",
               element: <PrivateRoute element={<AdminEditOrDeleteCards />} />, // Protect this route
+            },
+            {
+              path:"edit-cards",
+              element:<PrivateRoute element={<EditCard/>} />,
             }
           ]
         },

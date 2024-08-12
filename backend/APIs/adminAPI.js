@@ -20,7 +20,7 @@ adminRouter.get(
   verifyToken,
   expressAsyncHandler(async (req, res) => {
     const flashcards = await getAllFlashcardsWithCategory();
-    res.send({message:"all cards",payload:flashcards});
+    res.send({ message: "all cards", payload: flashcards });
   })
 );
 
@@ -38,11 +38,11 @@ adminRouter.post(
   "/add-flashcard",
   verifyToken,
   expressAsyncHandler(async (req, res) => {
-    console.log(req.body)
+    console.log(req.body);
     const { question, answer, category, categoryPath } = req.body;
     // console.log(question,+" "+answer+" "+categoryName+" "+categoryPath)
     const flashcardId = await addFlashcard(question, answer, category, categoryPath);
-    console.log(flashcardId)
+    console.log(flashcardId);
     res
       .status(201)
       .json({ status: "success", message: "Flashcard added successfully", payload: flashcardId });
@@ -54,13 +54,16 @@ adminRouter.put(
   "/edit-flashcard/:id",
   verifyToken,
   expressAsyncHandler(async (req, res) => {
-    const { id } = req.params;
-    const { question, answer, categoryName } = req.body;
-    const rowsAffected = await editFlashcard(id, question, answer, categoryName);
+    const { id } = req.params
+    console.log('id',id)
+    console.log(req.body)
+    const { question, answer, category } = req.body;
+    // console.log('in editCard API: id,question, answer, categoryName',id,question, answer, categoryName )
+    const rowsAffected = await editFlashcard(id, question, answer, category);
     if (rowsAffected > 0) {
-      res.json({ message: "Flashcard updated successfully" });
+      res.send({ statusCode: 55, message: "Flashcard updated successfully" });
     } else {
-      res.status(404).json({ message: "Flashcard not found" });
+      res.send({ statusCode: 54, message: "Flashcard not found" });
     }
   })
 );
@@ -73,7 +76,7 @@ adminRouter.delete(
     const { id } = req.params;
     const rowsAffected = await deleteFlashcard(id);
     if (rowsAffected > 0) {
-      res.send({ statusCode:53, message: "Flashcard deleted successfully" });
+      res.send({ statusCode: 53, message: "Flashcard deleted successfully" });
     } else {
       res.status(404).json({ message: "Flashcard not found" });
     }
