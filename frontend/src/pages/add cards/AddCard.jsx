@@ -48,9 +48,18 @@ function AddCard() {
 
   async function onSubmit(cardData) {
     try {
+      // Check if the category is "other" and replace it with newCategory value
+      if (cardData.category === "other" && cardData.newCategory) {
+        cardData.category = cardData.newCategory;
+        delete cardData.newCategory; // Remove the newCategory field
+      }
+  
       console.log("in addCard.jsx", cardData);
+  
+      // Make the API request with the updated cardData
       const res = await axiosWithToken.post("https://flash-card-quiz-webapp-backend.onrender.com/admin/add-flashcard", cardData);
       console.log(res.data);
+  
       if (res.data.status === "success") {
         alert("Card Inserted Successfully");
       }
@@ -58,6 +67,7 @@ function AddCard() {
       console.error("Error submitting flashcard:", error);
     }
   }
+  
 
   const handleFormSubmit = (data) => {
     // if (isOtherCategory) {
