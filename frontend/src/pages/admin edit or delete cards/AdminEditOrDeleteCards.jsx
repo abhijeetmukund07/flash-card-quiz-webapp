@@ -17,7 +17,7 @@ function AdminEditOrDeleteCards() {
 
   async function getFlashCards(params) {
     setIsLoading(true);
-    let res = await axiosWithToken.get("http://localhost:5000/admin/flashcards");
+    let res = await axiosWithToken.get("https://flash-card-quiz-webapp-backend.onrender.com/admin/flashcards");
     console.log(res.data);
     setFlashcards(res.data.payload);
     setIsLoading(false);
@@ -26,7 +26,7 @@ function AdminEditOrDeleteCards() {
 
   const handleEdit = async (id) => {
     console.log("Edit flashcard with ID:", id);
-    let res = await axiosWithToken.delete(`http://localhost:5000/admin/edit-flashcard/${id}`);
+    let res = await axiosWithToken.delete(`https://flash-card-quiz-webapp-backend.onrender.com/admin/edit-flashcard/${id}`);
     console.log("In handleEdit function: ", res.data);
     if (res.data.message === "Flashcard updated successfully") {
       alert("Flashcard updated successfully!");
@@ -44,7 +44,7 @@ function AdminEditOrDeleteCards() {
 
   const handleDelete = async (id) => {
     // Implement delete functionality
-    let res = await axiosWithToken.delete(`http://localhost:5000/admin/delete-flashcard/${id}`);
+    let res = await axiosWithToken.delete(`https://flash-card-quiz-webapp-backend.onrender.com/admin/delete-flashcard/${id}`);
     if (res.data.message === "Flashcard deleted successfully") {
       alert("Card deleted succesfully!");
       setFlashcards(deleteObjectById(flashcards, id));

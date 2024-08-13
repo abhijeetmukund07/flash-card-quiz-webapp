@@ -14,11 +14,11 @@ function AdminLoginForm() {
 
   const onSubmit = async (adminCred) => {
     try {
-      const response = await axios.post('http://localhost:5000/admin/login', {
+      const response = await axios.post('https://flash-card-quiz-webapp-backend.onrender.com/admin/login', {
         username: adminCred.username,  // Assuming the API expects 'username' field instead of 'email'
         password: adminCred.password
       });
-
+      console.log(response.data)
       // Check if the response is successful and a token is returned
       if (response.data.statusCode === 200 && response.data.token) {
         // Store the token in session storage

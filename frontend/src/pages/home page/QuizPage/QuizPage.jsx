@@ -45,7 +45,7 @@ function QuizPage() {
   async function getFlashCards(categoryPath) {
     console.log("in getflashcard function", categoryPath);
     setIsLoading(true);
-    let res = await axiosWithToken.get(`http://localhost:5000/category/${categoryPath}`);
+    let res = await axiosWithToken.get(`https://flash-card-quiz-webapp-backend.onrender.com/category/${categoryPath}`);
     console.log("in quizpage", res.data);
     setFlashcards(res.data);
     setIsLoading(false);

@@ -9,7 +9,7 @@ function CategoryNavs() {
 
   async function getCategories() {
     try {
-      const response = await axios.get("http://localhost:5000/all-categories");
+      const response = await axios.get("https://flash-card-quiz-webapp-backend.onrender.com/all-categories");
       setCategories(response.data); // Set categories data
       console.log(categories);
     } catch (error) {

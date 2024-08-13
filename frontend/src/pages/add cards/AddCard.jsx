@@ -26,7 +26,7 @@ function AddCard() {
 
   async function getCategories() {
     try {
-      const response = await axiosWithToken.get("http://localhost:5000/admin/categories");
+      const response = await axiosWithToken.get("https://flash-card-quiz-webapp-backend.onrender.com/admin/categories");
       setCategories(response.data); // Set categories data
       console.log(categories);
     } catch (error) {
@@ -49,7 +49,7 @@ function AddCard() {
   async function onSubmit(cardData) {
     try {
       console.log("in addCard.jsx", cardData);
-      const res = await axiosWithToken.post("http://localhost:5000/admin/add-flashcard", cardData);
+      const res = await axiosWithToken.post("https://flash-card-quiz-webapp-backend.onrender.com/admin/add-flashcard", cardData);
       console.log(res.data);
       if (res.data.status === "success") {
         alert("Card Inserted Successfully");
