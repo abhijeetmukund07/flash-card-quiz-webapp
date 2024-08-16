@@ -57,6 +57,9 @@ function AdminLoginForm() {
         />
         {errors.password && <p>{errors.password.message}</p>}
 
+        <p className="lead fs-5">Username: admin. Password: admin</p>
+        <p className="lead fs-6">This website is still in testing stage. So the paswword and username is hardcoded</p>
+
         <button type="submit">Submit</button>
       </form>
     </div>
